@@ -1,26 +1,54 @@
-FROM resin/raspberrypi2-debian
-MAINTAINER justin@dray.be
+FROM resin/raspberrypi3-debian
+MAINTAINER d@davo.io
 
-# Let's start with some basic stuff.
+################
+# SSH
+################
+
+RUN apt-get update && apt-get install -yq --no-install-recommends \
+    openssh-server
+
+# Set up config for openSSH.
+# Default root password is root, but can be overridden by setting ROOT_PASS env var
+RUN mkdir /var/run/sshd \
+    && echo "root:${ROOT_PASS:=root}" | chpasswd \
+    && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
+
+
+################
+# Docker Hypriot
+################
+
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
     lxc \
     iptables
-    
+
 # Install Docker from hypriot repos
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37BBEE3F7AD95B3F && \
     echo "deb https://packagecloud.io/Hypriot/Schatzkiste/debian/ wheezy main" > /etc/apt/sources.list.d/hypriot.list && \
     apt-get update && \
     apt-get install -y docker-hypriot docker-compose
 
+# Remove apt lists, this reduces the size of the docker image
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# ???
 COPY ./wrapdocker /usr/local/bin/wrapdocker
 
+# Folder for local builds
 COPY ./apps /apps
 WORKDIR /apps
 
 # Define additional metadata for our image.
 VOLUME /var/lib/docker
+
+# Enable systemd init system in the container, so it never closes. Helps to debug.
+# http://docs.resin.io/runtime/runtime/#init-system
+ENV INITSYSTEM on
+
 ADD start /start
 CMD /start
