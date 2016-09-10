@@ -13,7 +13,7 @@ Depending on your internet connection might take a while to finish building, as 
 Debug
 ------
 
-- ssh `root@localip`
+- ssh `root@localip` and `export $(xargs -n 1 -0 < /proc/1/environ)`
 - Check if containers are running `docker ps`
 - Try to start docker-compose `cd /apps && docker-compose up -d`
 

@@ -36,15 +36,9 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37BBEE3F7AD95B3F &&
 # Remove apt lists, this reduces the size of the docker image
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# ???
-COPY ./wrapdocker /usr/local/bin/wrapdocker
-
 # Folder for local builds
 COPY ./apps /apps
 WORKDIR /apps
-
-# Define additional metadata for our image.
-VOLUME /var/lib/docker
 
 # Enable systemd init system in the container, so it never closes. Helps to debug.
 # http://docs.resin.io/runtime/runtime/#init-system

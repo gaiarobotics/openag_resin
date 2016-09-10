@@ -1,12 +1,10 @@
 #!/bin/bash -xe
 
-# Mount /data to default docker folder so containers persist between resin deploys
-mount -o bind /data /var/lib/docker
-
-# Start docker and services
-if ! docker info &>/dev/null; then
-	wrapdocker echo
-fi
+# Set /data to be root docker folder to enable cache between resin deploys
+# for docker running in a systemd system
+sed -i 's|docker daemon|docker daemon -g /data|' /lib/systemd/system/docker.service
+systemctl daemon-reload
+systemctl restart docker
 
 # Build embedded containers
 # Not recommended to compile anything, as this runs on the rpi, not on resin
