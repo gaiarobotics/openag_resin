@@ -11,7 +11,7 @@ Instructions
 
 - Create a Raspberry Pi 3 application in [resin.io](https://resin.io)
 
-- Download and flash the device OS onto the SD card
+- Download and flash the device OS onto the SD card, an easy way is to use [Etcher](https://www.etcher.io/)
 
 - Connect your SD card on the Raspberry Pi, also the Arduino Mega to one of the USB ports
 
