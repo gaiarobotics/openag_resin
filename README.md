@@ -1,4 +1,4 @@
-OpenAg Brain multi container deployment tool
+[OpenAg Brain](https://github.com/OpenAgInitiative/openag_brain) multi container deployment tool
 ==========
 
 A Raspberry Pi 3 docker application container for resin.io. Useful to provide docker configuration, git push deploys, a partial build server, and remote access to your project.
