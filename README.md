@@ -21,7 +21,7 @@ Instructions
 
 - Set up a remote to point to your new resin application repo
 
-  `git remote add resin your-user@git.resin.io:your-user/your-application-name.git``
+  `git remote add resin your-user@git.resin.io:your-user/your-application-name.git`
 
 - Push to the `master` branch of that remote. You should see the docker build process in the resin.io build servers, afterwards, the image is then uploaded to a docker registry.
 
@@ -56,7 +56,8 @@ Instructions
 11.09.16 22:52:32 [-0700] + docker-compose up -d --remove-orphans
 ```
 
-> If it were the first time deploying, you'll see a mess of download logs of docker images onto the Raspberry Pi. Go grab a cup of coffee it can take a while
+> If it were the first time deploying, you'll see a mess of download logs of docker images onto the Raspberry Pi. Go grab a cup of coffee, it can take a while.
+
 > If the images were already cached, this is what you'd see:
 
 ```
