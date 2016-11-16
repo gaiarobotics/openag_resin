@@ -6,7 +6,7 @@ services:
         expose:
             - 5000
         devices:
-            - "/dev/ttyUSB0:/dev/ttyACM0"
+            - "/dev/ttyACM0:/dev/ttyACM0"
         command: ~/catkin_ws/devel/env.sh rosrun openag_brain main -D http://db:5984 -A http://brain:5000 -f default --screen
         depends_on:
             - db
