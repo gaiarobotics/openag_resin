@@ -1,0 +1,11 @@
+{
+  "firmware_module": [
+    {
+      "_id": "am2315_1",
+      "environment": "environment_1",
+      "type": "am2315"
+    }
+  ],
+  "software_module": [
+  ]
+}
