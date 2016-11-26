@@ -1,12 +1,11 @@
-[OpenAg Brain](https://github.com/OpenAgInitiative/openag_brain) multi container deployment tool
+[OpenAg brain](https://github.com/OpenAgInitiative/openag_brain) in a docker-in-docker+docker-compose application
 ==========
-
-This is a Raspberry Pi 3 docker application container for [resin.io](https://resin.io). Useful to configure using a Dockerfile, enable `git push` deploys, leverage a build server, and enable remote access (ssh/https) to your project.
 
 The application starts a docker-in-docker instance using [hypriot](hypriot.com), which builds and runs the containers via docker-compose.
 
+This is Raspberry Pi 3 docker application should run smoothly with [resin.io](https://resin.io) applications. The cool thing about them is that you can configure them using a Dockerfile, enable `git push` deploys, leverage a build server, and enable remote access (ssh/https) to your project.
 
-Instructions
+Instructions for [resin.io](https://resin.io)
 --------------
 
 - Create a Raspberry Pi 3 application in [resin.io](https://resin.io)
@@ -44,13 +43,12 @@ Instructions
 
 ```
 11.09.16 22:52:11 [-0700] Systemd init system enabled.
-11.09.16 22:52:11 [-0700] [/lib/systemd/system/docker.service:19] Unknown lvalue 'Delegate' in section 'Service'
 11.09.16 22:52:14 [-0700] + sed -i 's|docker daemon|docker daemon -g /data|' /lib/systemd/system/docker.service
 11.09.16 22:52:14 [-0700] + systemctl daemon-reload
 11.09.16 22:52:15 [-0700] + systemctl restart docker
 ```
 
-> Start the docker-compose service in detach mode. The first time this runs it will take a while, as the images have to be downloaded.
+> Start the docker-compose service in deatached mode. The first time this command runs will take a while, as the images have to be downloaded from the docker hub.
 
 ```
 11.09.16 22:52:32 [-0700] + docker-compose up -d --remove-orphans
