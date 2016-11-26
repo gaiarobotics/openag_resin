@@ -6,13 +6,6 @@ sed -i 's|docker daemon|docker daemon -g /data|' /lib/systemd/system/docker.serv
 systemctl daemon-reload
 systemctl restart docker
 
-# Build embedded containers
-# Not recommended to compile anything, as this runs on the rpi, not on resin
-containers=$(find * -maxdepth 0 -type d)
-for i in $containers; do
-	docker-compose build $i
-done
-
 # Start service in detach mode, and clean orphaned containers
 docker-compose up -d --remove-orphans
 
