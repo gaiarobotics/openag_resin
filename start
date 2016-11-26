@@ -19,19 +19,3 @@ docker-compose up -d --remove-orphans
 # Remove unused containers
 docker rm -v $(docker ps -a -q -f status=exited 2>/dev/null) &>/dev/null || :
 docker rmi $(docker images -f "dangling=true" -q 2>/dev/null) &>/dev/null || :
-
-
-# keep_alive() {
-# 	  if [[ $(docker-compose ps 2>&1 | tail -n+3 | grep -v Up | wc -l) -ne 0 ]]; then
-# 		    echo "A container has exited. Restarting docker stack."
-# 		    docker-compose down
-# 		    docker-compose up -d
-# 	  fi
-# }
-#
-# # TODO Only enable keep_alive if DEBUG env not set
-# set +x
-# while true; do
-# 	sleep 5m
-# 	keep_alive
-# done
