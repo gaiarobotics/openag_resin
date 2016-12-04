@@ -1,11 +1,111 @@
 {
+  "firmware_module_type": [
+    {
+      "_id": "sparkfun_tsl2561",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/davoclavo/openag_sparkfun_tsl2561.git"
+      },
+      "description": "Driver for the Sparkfun TSL2561 sensor breakout board",
+      "header_file": "openag_sparkfun_tsl2561.h",
+      "class_name": "SparkfunTSL2561",
+      "arguments": [
+        {
+          "name": "i2c_address",
+          "type": "int",
+          "default": 57
+        }
+      ],
+      "inputs": {
+        "gain": {
+          "type": "std_msgs/Bool",
+          "categories": ["calibration"]
+        },
+        "time_setting": {
+          "type": "std_msgs/Int32",
+          "categories": ["calibration"]
+        },
+        "integration_time": {
+          "type": "std_msgs/Int32",
+          "categories": ["calibration"]
+        }
+      },
+      "outputs": {
+        "light_illuminance": {
+          "type": "std_msgs/Float32"
+        }
+      },
+      "dependencies": [
+        {"type": "git", "url": "https://github.com/OpenAgInitiative/openag_firmware_module.git"},
+        {"type": "git", "url": "https://github.com/sparkfun/SparkFun_TSL2561_Arduino_Library"}
+      ]
+    }
+  ],
   "firmware_module": [
     {
       "_id": "am2315_1",
       "environment": "environment_1",
       "type": "am2315"
+    },
+    {
+      "_id": "tsl2561_1",
+      "environment": "environment_1",
+      "type": "sparkfun_tsl2561"
+    },
+    {
+      "_id": "heater_1",
+      "arguments": [53, true],
+      "environment": "environment_1",
+      "type": "binary_actuator",
+      "inputs": {
+        "cmd": {
+          "variable": "air_temperature",
+          "multiplier": 1.0
+        }
+      }
+    },
+    {
+      "_id": "light_1",
+      "arguments": [51],
+      "environment": "environment_1",
+      "type": "pwm_actuator",
+      "inputs": {
+        "cmd": {
+          "variable": "light_illuminance"
+        }
+      }
     }
   ],
   "software_module": [
+    {
+      "_id": "arduino_handler",
+      "type": "openag_brain:handle_arduino.py",
+      "parameters": {
+        "should_flash": true
+      }
+    },
+    {
+      "_id": "light_controller_1",
+      "type": "openag_brain:direct_controller.py",
+      "environment": "environment_1",
+      "parameters": {
+        "variable": "light_illuminance"
+      }
+    },
+    {
+      "_id": "air_temperature_controller_1",
+      "type": "openag_brain:pid.py",
+      "environment": "environment_1",
+      "parameters": {
+        "variable": "air_temperature",
+        "Kp": 1,
+        "Ki": 0,
+        "Kd": 0,
+        "upper_limit": 1,
+        "lower_limit": -1,
+        "windup_limit": 1000,
+        "deadband_width": 0.5
+      }
+    }
   ]
 }
