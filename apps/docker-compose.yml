@@ -3,6 +3,7 @@ version: '2'
 services:
     brain:
         image: openag/rpi_brain
+        container_name: brain
         expose:
             - 5000
         devices:
@@ -20,6 +21,7 @@ services:
                 max-file: "5"
     db:
         image: dogi/rpi-couchdb
+        container_name: db
         expose:
             - 5984
         ports:
