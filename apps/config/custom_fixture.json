@@ -66,9 +66,9 @@
     },
     {
       "_id": "light_1",
-      "arguments": [2],
+      "arguments": [51],
       "environment": "environment_1",
-      "type": "pwm_actuator",
+      "type": "binary_actuator",
       "inputs": {
         "cmd": {
           "variable": "light_illuminance"
