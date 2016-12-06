@@ -1,9 +1,15 @@
-[OpenAg brain](https://github.com/OpenAgInitiative/openag_brain) in a docker-in-docker+docker-compose application
+[OpenAg brain](https://github.com/OpenAgInitiative/openag_brain) application for resin.io
 ==========
 
-The application starts a docker-in-docker instance using [hypriot](hypriot.com), which builds and runs the containers via docker-compose.
+The application starts a docker-in-docker instance using [hypriot](hypriot.com), which builds and runs the containers via [docker-compose](https://docs.docker.com/compose/).
 
-This is Raspberry Pi 3 docker application should run smoothly with [resin.io](https://resin.io) applications. The cool thing about them is that you can configure them using a Dockerfile, enable `git push` deploys, leverage a build server, and enable remote access (ssh/https) to your project.
+This Raspberry Pi 3 docker application should run smoothly with a [resin.io](https://resin.io) setup. The cool thing about resin.io is that you can configure your application just using a Dockerfile and deploying with `git push resin master`  (à la heroku). You can also leverage a build server, which is useful as build docker images faster. And last but not least, enable ssh and a public unique url to your project through a VPN, so you don't need to map ports on your router.
+
+Configuration
+-------------
+
+`/apps/config` is a shared volume for the brain container, so you can add fixtures or whatever files you might need in order to run your openag_brain.
+
 
 Instructions for [resin.io](https://resin.io)
 --------------
@@ -97,6 +103,6 @@ Useful Links
 
 - [OpenAg brain](https://github.com/OpenAgInitiative/openag_brain)
 - [OpenAg brain docker stuff](https://github.com/OpenAgInitiative/openag_brain_docker_rpi)
-- [Resin.io Blog entry about multi container apps](https://resin.io/blog/multi-container-with-docker-compose-on-resin-io/)
-- [Resin multi container generic repo](https://github.com/justin8/resin-multi-container)
+- [Resin.io blog entry about multi container apps](https://resin.io/blog/multi-container-with-docker-compose-on-resin-io/)
+- [resin-multi-container original repo](https://github.com/justin8/resin-multi-container)
 - [Problems with USB devices not showing up in /dev](https://talk.resin.io/t/problems-connecting-to-usb-serialport-from-container/24)
