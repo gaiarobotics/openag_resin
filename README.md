@@ -3,7 +3,7 @@
 
 The application starts a docker-in-docker instance using [hypriot](hypriot.com), which builds and runs the containers via [docker-compose](https://docs.docker.com/compose/).
 
-This Raspberry Pi 3 docker application should run smoothly with a [resin.io](https://resin.io) setup. The cool thing about resin.io is that you can configure your application just using a Dockerfile and deploying with `git push resin master`  (à la heroku). You can also leverage a build server, which is useful as build docker images faster. And last but not least, enable ssh and a public unique url to your project through a VPN, so you don't need to map ports on your router.
+This Raspberry Pi 3 docker application should run smoothly with a [resin.io](https://resin.io) setup. The cool thing about resin.io is that you can configure your application just using a Dockerfile and deploying with `git push resin master`  (à la heroku). You can also leverage a build server, which is useful as build docker images faster. And last but not least, enable ssh and a public unique url to your project through a VPN.
 
 Configuration
 -------------
