@@ -54,7 +54,7 @@
     },
     {
       "_id": "light_1",
-      "arguments": [53],
+      "arguments": [53, true],
       "environment": "environment_1",
       "type": "binary_actuator",
       "inputs": {
