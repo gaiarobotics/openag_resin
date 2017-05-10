@@ -22,7 +22,7 @@ Instructions for [resin.io](https://resin.io)
 
 - Clone this repo
 
-  `git clone https://github.com/davoclavo/openag-resin-multi-container.git`
+  `git clone https://github.com/davoclavo/openag_resin.git`
 
 - Set up a remote to point to your new resin application repo
 
