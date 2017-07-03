@@ -1,0 +1,3 @@
+[submodule "apps/openag_brain"]
+	path = apps/openag_brain
+	url = https://github.com/OpenAgInitiative/openag_brain.git
