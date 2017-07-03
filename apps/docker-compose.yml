@@ -33,12 +33,3 @@ services:
             options:
                 max-size: "50m"
                 max-file: "5"
-    docker-ui:
-        image: portainer/portainer:arm
-        expose:
-            - 9000
-        ports:
-            - 9000:9000
-        volumes:
-            - '/var/run/docker.sock:/var/run/docker.sock'
-        restart: unless-stopped
