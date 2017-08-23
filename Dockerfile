@@ -25,7 +25,10 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
     lxc \
-    iptables
+    iptables \
+    vim \
+    git \
+    tmux
 
 # Install Docker from hypriot repos
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37BBEE3F7AD95B3F && \
