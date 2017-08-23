@@ -2,15 +2,17 @@ version: '2'
 
 services:
     brain:
-        image: openag/rpi_brain
-        # build: openag_brain
+        # image: openag/rpi_brain
+        build: https://github.com/davoclavo/openag_brain.git#docker_develop
         container_name: brain
         expose:
             - 5000
         devices:
             - "/dev/ttyACM0:/dev/ttyACM0"
             - "/dev/video0:/dev/video0"
-        command: ~/catkin_ws/devel/env.sh rosrun openag_brain main personal_food_computer_v2.launch -D http://db:5984 -A http://brain:5000  --screen
+            # https://github.com/openaginitiative/openag_brain/blob/develop/nodes/arduino_handler.py#L322
+            - "/dev/ttyACM0:/dev/serial/by-id/arduino"
+        command: /home/pi/catkin_ws/devel/env.sh rosrun openag_brain main personal_food_computer_v2.launch -D http://db:5984 -A http://brain:5000  --screen
         volumes:
           - /apps/config/:/home/pi/config/
         depends_on:
