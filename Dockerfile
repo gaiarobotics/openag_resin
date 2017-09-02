@@ -40,12 +40,11 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37BBEE3F7AD95B3F &&
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Folder for local builds
-COPY ./apps /apps
-WORKDIR /apps
+COPY . /root
+WORKDIR /root
 
 # Enable systemd init system in the container, so it never closes. Helps to debug.
 # http://docs.resin.io/runtime/runtime/#init-system
 ENV INITSYSTEM on
 
-ADD start /start
-CMD /start
+CMD /root/start
