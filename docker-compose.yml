@@ -2,8 +2,8 @@ version: '2'
 
 services:
     brain:
-        # image: openag/rpi_brain
-        build: https://github.com/davoclavo/openag_brain.git#docker_develop
+        # image: davoclavo/openag_brain
+        build: https://github.com/davoclavo/openag_brain.git#develop
         container_name: brain
         expose:
             - 5000
