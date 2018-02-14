@@ -1,9 +1,43 @@
-[OpenAg brain](https://github.com/OpenAgInitiative/openag_brain) application for resin.io
+[OpenAg resin](https://github.com/davoclavo/openag_resin)
 ==========
 
-The application starts a docker-in-docker instance using [hypriot](hypriot.com), which builds and runs the containers via [docker-compose](https://docs.docker.com/compose/).
+This is a [resin.io](https://resin.io) application for the [OpenAg brain](https://github.com/OpenAgInitiative/openag_brain). The application starts a docker-in-docker instance using [hypriot](hypriot.com), which builds and runs the containers via [docker-compose](https://docs.docker.com/compose/).
 
-This Raspberry Pi 3 docker application should run smoothly with a [resin.io](https://resin.io) setup. The cool thing about resin.io is that you can configure your application just using a Dockerfile and deploying with `git push resin master`  (à la heroku). You can also leverage a build server, which is useful as build docker images faster. And last but not least, enable ssh and a public unique url to your project through a VPN.
+Why resin? it allows you to configure your application using just a Dockerfile, deploy it to the device with `git push resin master`, then you can connect from anywhere via ssh and register a publicly accessible url (e.g. for dashboard access)
+
+The docker-in-docker build process fails on some raspberry pis apparently, so your mileage may vary. If you find one that works, you can use it as an SD maker (until the build process is improved)
+
+Instructions
+--------------
+
+1. Create a Raspberry Pi 3 application in [resin.io](https://resin.io)
+
+2. Download and flash the device OS onto the SD card, an easy way is to use [Etcher](https://www.etcher.io/)
+
+3. Connect your SD card on the Raspberry Pi, also the Arduino Mega to one of the USB ports
+
+4. Clone this repo
+
+  `git clone https://github.com/davoclavo/openag_resin.git`
+
+5. Set up a remote to point to your new resin application repo
+
+  `git remote add resin your_user@git.resin.io:your_user/your_application_name.git`
+
+6. Push to the `master` branch of that remote. You should see the docker build process in the resin.io build servers, afterwards, the image is then uploaded to a docker registry.
+
+  `git push resin master`
+
+7. Go to your device summary page on resin.io. There is quite a bit of log output, so look at the Extra logs section below to see some examples and compare
+
+8. After everything succeeds, you should be able to locally ssh to your device using `root` as username and password. Make sure to replace the ip with your device's, it can be located on your resin device dashboard
+
+`ssh root@192.168.0.99`
+
+Or you can ssh remotely using the [resin-cli](https://github.com/resin-io/resin-cli). Make sure to grab your device UUID from the resin dashboard
+
+`resin ssh u7xh8j`
+
 
 Configuration
 -------------
@@ -11,28 +45,8 @@ Configuration
 `/apps/config` is a shared volume for the brain container, so you can add fixtures or whatever files you might need in order to run your openag_brain.
 
 
-Instructions for [resin.io](https://resin.io)
---------------
-
-- Create a Raspberry Pi 3 application in [resin.io](https://resin.io)
-
-- Download and flash the device OS onto the SD card, an easy way is to use [Etcher](https://www.etcher.io/)
-
-- Connect your SD card on the Raspberry Pi, also the Arduino Mega to one of the USB ports
-
-- Clone this repo
-
-  `git clone https://github.com/davoclavo/openag_resin.git`
-
-- Set up a remote to point to your new resin application repo
-
-  `git remote add resin your-user@git.resin.io:your-user/your-application-name.git`
-
-- Push to the `master` branch of that remote. You should see the docker build process in the resin.io build servers, afterwards, the image is then uploaded to a docker registry.
-
-  `git push resin master`
-
-- Go to your device summary page on resin.io. Some of your log sections should look like these:
+Extra logs
+-----------
 
 > Downloading, installing and starting application. This application was built and uploaded to the docker registry during the `git push` 
 
@@ -80,14 +94,6 @@ Instructions for [resin.io](https://resin.io)
 11.09.16 22:52:36 [-0700] + :
 ```
 
- - Now you should be able to locally ssh to your device using `root` as username and password. Make sure to replace the ip with your device one, it can be located on your resin device dashboard
-
-`ssh root@192.168.0.99`
-
-- Or you can ssh remotely using the [resin-cli](https://github.com/resin-io/resin-cli). Make sure to grab your device UUID from the resin dashboard
-
-`resin ssh u7xh8j`
-
 
 Debug
 ------
@@ -98,7 +104,7 @@ Debug
 - Try to start docker-compose `cd /apps && docker-compose up -d`
 
 
-Useful Links
+Links
 ------
 
 - [OpenAg brain](https://github.com/OpenAgInitiative/openag_brain)
