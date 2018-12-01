@@ -13,8 +13,6 @@ services:
             # https://github.com/openaginitiative/openag_brain/blob/develop/nodes/arduino_handler.py#L322
             - "/dev/ttyACM0:/dev/serial/by-id/arduino"
         command: /home/pi/catkin_ws/devel/env.sh rosrun openag_brain main personal_food_computer_v2.launch -D http://db:5984 -A http://brain:5000  --screen
-        volumes:
-          - /apps/config/:/home/pi/config/
         depends_on:
             - db
         restart: unless-stopped
