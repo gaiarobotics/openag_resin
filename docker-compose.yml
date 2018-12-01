@@ -2,7 +2,7 @@ version: '2'
 
 services:
     brain:
-        image: davoclavo/openag_brain
+        image: davoclavo/openag_brain_rpi
         # build: https://github.com/davoclavo/openag_brain.git#develop
         container_name: brain
         expose:
